@@ -8,7 +8,8 @@ const Schema = mongoose.Schema;
 const companySchema = new Schema({
     CompanyName: { type: String, required: true },
     CompanyEmail: { type: String, required: true},
-    password: { type: String, required: true, minlength:8 }
+    password: { type: String, required: true, minlength:8 },
+    AuthToken:{type:String}
 });
 
 //export companySchema as Company
