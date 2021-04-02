@@ -68,18 +68,12 @@ const signup = async (req, res) => {
   }
 
   //return response
-  let user;
-  try{
-      user=await (await Company.findOne({_id:newUser._id},"-password"));
-  }
-  catch(err){
-    const error = new HttpResponse(
-        "Error in getting user from DB",
-        500
-      );
-      return res.status(500).json({ response: error });
-  }
-  res.status(201).json(user);
+  res.status(201).json({
+    CompanyId:newUser._id,
+    CompanyName:newUser.CompanyName,
+    CompanyEmail:newUser.CompanyEmail,
+    token:token
+  });
 };
 
 
@@ -137,18 +131,12 @@ const signin = async (req, res) => {
   }
 
 //return response
-  let user;
-  try{
-      user=await (await Company.findOne({_id:userExists._id},"-password"));
-  }
-  catch(err){
-    const error = new HttpResponse(
-        "Error in getting user from DB",
-        500
-      );
-      return res.status(500).json({ response: error });
-  }
-  res.status(201).json(user);
+  res.status(201).json({
+    CompanyId:userExists._id,
+    CompanyName:userExists.CompanyName,
+    CompanyEmail:userExists.CompanyEmail,
+    token:token
+  });
 };
 
 exports.singup = signup;
