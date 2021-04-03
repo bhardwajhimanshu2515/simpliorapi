@@ -11,7 +11,7 @@ const userInfoSchema = new Schema({
         ref:'Company'
     },
     FirstName: { type: String, required: true },
-    LastNameEmail: { type: String, required: true},
+    LastName: { type: String, required: true},
     Gender: { type: String, required: true},
     DOB: { type: String, required: true},
     ContactNumber: { type: String, required: true},

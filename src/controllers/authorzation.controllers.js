@@ -3,7 +3,6 @@ const bycrypt = require('bcryptjs'); //for hashing
 const jwt = require('jsonwebtoken'); //for token generation
 const HttpResponse = require('../models/http-response'); //for response with message and code
 const Company = require('../models/company');  //companySchema
-const UserInfo=require("../models/userInfo"); //userInfoSchema
 
 const signup = async (req, res) => {
   //desctructuring of req.body object  
@@ -56,7 +55,7 @@ const signup = async (req, res) => {
   //as hashing is done generate jsonwebtoken
   let token;
   try {
-    token = jwt.sign({email:newUser.email},
+    token = jwt.sign({email:newUser.CompanyEmail},
       "mySEcrET",
       { expiresIn: '7d' });
   } catch (err) {
