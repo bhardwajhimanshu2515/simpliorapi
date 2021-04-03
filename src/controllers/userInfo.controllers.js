@@ -1,6 +1,5 @@
 "use strict";
 const HttpResponse = require("../models/http-response"); //for response with message and code
-const { findOneAndUpdate } = require("../models/userInfo");
 const UserInfo = require("../models/userInfo"); //userInfoSchema
 
 const editInfo = async (req, res) => {
