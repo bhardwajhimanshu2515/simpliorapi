@@ -9,5 +9,6 @@ const router = express.Router();
 router.use(checkToken);
 
 router.post('/addExperience',experienceInfoController.addExperience);
+router.post('/editExperience',experienceInfoController.editExperience);
 
 module.exports = router;
