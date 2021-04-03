@@ -19,13 +19,7 @@ const userInfoSchema = new Schema({
     City: { type: String, required: true},
     State: { type: String, required: true},
     Country: { type: String, required: true},
-    Zip: { type: String, required: true},
-    experience:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"ExperienceInfo"
-        }
-    ]       
+    Zip: { type: String, required: true}
 });
 
 //export userInfoSchema as Company
