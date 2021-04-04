@@ -1,38 +1,25 @@
 "use strict";
 const HttpResponse = require("../models/http-response"); //for response with message and code
-const experienceInfo = require("../models/experienceInfo"); //experienceInfoSchema
+const ExperienceInfo = require("../models/experienceInfo"); //experienceInfoSchema
 
 const addExperience = async (req, res) => {
   console.log(req.body);
-  let result = [];
-  for (let i = 0; i < req.body.length; i++) {
-    let experience = new experienceInfo({
-      UserInfoId: req.body[i].UserInfoId,
-      Title: req.body[i].Title,
-      EmploymentType: req.body[i].EmploymentType,
-      CompanyName: req.body[i].CompanyName,
-      Location: req.body[i].Location,
-      StartDate: req.body[i].StartDate,
-      EndDate: req.body[i].EndDate,
-      Headline: req.body[i].Headline,
-      Description: req.body[i].Description,
-    });
-    try {
-      await experience.save;
-    } catch (err) {
-      console.log(err);
-      return res.status(500).json("Error in saving experience");
-    }
-    result.push(experience);
+  let addExperience;
+  try{
+    addExperience=await ExperienceInfo.insertMany(req.body)
   }
-
-  res.status(200).json(result);
+  catch(err){
+    console.log(err);
+    return res.status(500).json("Error in saving experience")
+  }
+  return res.status(200).json(addExperience);
 };
 
 const editExperience = async (req, res) => {
     console.log(req.body);
   const {
     ExperienceInfoId,
+    UserInfoId,
     Title,
     EmploymentType,
     CompanyName,
@@ -44,12 +31,13 @@ const editExperience = async (req, res) => {
   } = req.body;
   let updatedExperienceInfo;
   try {
-    updatedExperienceInfo = await experienceInfo.findOneAndUpdate(
+    updatedExperienceInfo = await ExperienceInfo.findOneAndUpdate(
       { _id: ExperienceInfoId },
       {
         $set: {
           Title: Title,
           EmploymentType: EmploymentType,
+          UserInfoId:UserInfoId,
           CompanyName: CompanyName,
           Location: Location,
           StartDate: StartDate,
@@ -66,7 +54,15 @@ const editExperience = async (req, res) => {
       return res.status(500).json("Error in updation of Experience")
   }
   console.log(updatedExperienceInfo);
-  res.status(200).json(updatedExperienceInfo);
+  let allExperience;
+  try{
+    allExperience=await ExperienceInfo.find({UserInfoId:UserInfoId})
+  }
+  catch(err){
+    console.log(err)
+    return res.status(500).json("Error in getting all experiences");
+  }
+  return res.status(200).json(allExperience);
 };
 exports.addExperience = addExperience;
 exports.editExperience = editExperience;
