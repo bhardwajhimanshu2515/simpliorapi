@@ -8,6 +8,7 @@ const cors=require("cors");
 const authorizationRoutes = require('./src/routes/authorization.routes');
 const userInfoRoutes=require("./src/routes/userInfo.routes");
 const experienceInfoRoutes=require("./src/routes/experienceInfo.routes");
+const allRoutes=require("./src/routes/all.routes");
 
 //create server
 const app = express();
@@ -22,6 +23,7 @@ app.use(cors());
 app.use('/api/userAuth',authorizationRoutes);
 app.use('/api/userInfo',userInfoRoutes);
 app.use("/api/experienceInfo",experienceInfoRoutes);
+app.use("/api/all",allRoutes);
 
 // DbURL here
 var dbURL = "mongodb://127.0.0.1:27017/simpliorDatabase";
