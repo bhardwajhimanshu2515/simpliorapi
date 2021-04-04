@@ -8,7 +8,6 @@ const router = express.Router();
 //all the api written below this will require a token
 router.use(checkToken);
 
-router.get('/allBasicInfo/:CompanyId',allController.allBasicInfo);
-router.get('/allExperienceInfo/:UserInfoId',allController.allExperienceInfo);
+router.get('/allInfo/:CompanyId',allController.allInfo);
 
 module.exports = router;

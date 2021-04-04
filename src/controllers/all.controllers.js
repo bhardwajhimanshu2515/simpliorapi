@@ -5,7 +5,7 @@ const Company = require('../models/company');  //companySchema
 const UserInfo = require("../models/userInfo"); //userInfoSchema
 const ExperienceInfo = require("../models/experienceInfo"); //experienceInfoSchema
 
-const allBasicInfo=async(req,res)=>{
+const allInfo=async(req,res)=>{
     console.log(req.params.CompanyId);;
     let basicDetails;
     try{
@@ -15,21 +15,17 @@ const allBasicInfo=async(req,res)=>{
         console.log(err)
         return res.status(500).json("Error in getting basic details")
     }
-    return res.status(200).json(basicDetails);
-}
-
-const allExperienceInfo=async(req,res)=>{
-    console.log(req.params.UserInfoId);
     let experienceDetails;
     try{
-        experienceDetails=await ExperienceInfo.find({UserInfoId:req.params.UserInfoId})
+        experienceDetails=await ExperienceInfo.find({UserInfoId:basicDetails._id})
     }
     catch(err){
         console.log(err)
-        return res.status(500).json("Error in getting experience details")
+        return res.status(500).json("Error in getting all experience")
     }
-    return res.status(200).json(experienceDetails);
+
+    return res.status(200).json({details:basicDetails,experience:experienceDetails});
 }
 
-exports.allBasicInfo=allBasicInfo;
-exports.allExperienceInfo=allExperienceInfo;
+
+exports.allInfo=allInfo;
