@@ -18,7 +18,8 @@ const editInfo = async (req, res) => {
     Zip,
   } = req.body;
   console.log(UserId);
-  if (UserId === undefined) {
+  if (UserId === undefined && UserId===null) {
+    console.log("hello")
     let basicDetails = new UserInfo({
       CompanyId,
       FirstName,
@@ -41,6 +42,7 @@ const editInfo = async (req, res) => {
     }
     return res.status(200).json(basicDetails);
   } else if(UserId!==undefined) {
+    console.log("hi")
     let updatedInfo;
     try {
       updatedInfo = await UserInfo.findOneAndUpdate(
