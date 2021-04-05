@@ -12,7 +12,15 @@ const addExperience = async (req, res) => {
     console.log(err);
     return res.status(500).json("Error in saving experience")
   }
-  return res.status(200).json(addExperience);
+  let allExperience;
+  try{
+    allExperience=await ExperienceInfo.find({UserInfoId:req.body[0].UserInfoId});
+  }
+  catch(err){
+    console.log(err)
+    return res.status(500).json("Error in getting all experience");
+  }
+  res.status(200).json(allExperience);
 };
 
 const editExperience = async (req, res) => {
