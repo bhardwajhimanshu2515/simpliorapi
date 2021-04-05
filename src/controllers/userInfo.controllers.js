@@ -18,7 +18,7 @@ const editInfo = async (req, res) => {
     Zip,
   } = req.body;
   console.log(UserId);
-  if (UserId === undefined && UserId===null) {
+  if (UserId === undefined || UserId===null) {
     console.log("hello")
     let basicDetails = new UserInfo({
       CompanyId,
