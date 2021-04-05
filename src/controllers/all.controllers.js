@@ -15,7 +15,8 @@ const allInfo=async(req,res)=>{
         console.log(err)
         return res.status(500).json("Error in getting basic details")
     }
-    let experienceDetails;
+    if(basicDetails){
+        let experienceDetails;
     try{
         experienceDetails=await ExperienceInfo.find({UserInfoId:basicDetails._id})
     }
@@ -25,6 +26,10 @@ const allInfo=async(req,res)=>{
     }
 
     return res.status(200).json({details:basicDetails,experience:experienceDetails});
+    }
+    else{
+        return res.status(500).json({details:"undefined"});
+    }
 }
 
 
